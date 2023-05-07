@@ -2,10 +2,27 @@ import React from "react";
 import StockChart_decrease from "./stock.svg";
 import StockChart_increase from "./stock2.svg";
 import numeral from "numeral";
+import {useDispatch} from "react-redux"
 import { db } from "./firebase";
 import "./StatsRow.css";
 
 function StatsRow(props) {
+  const dispatch = useDispatch()
+
+  const setCurrentStock = (stock) => {
+dispatch({
+  type: "SET_CURRENT_STOCK",
+  data: stock
+})
+  }
+
+  const setCurrentStockData = (stock) => {
+    
+    dispatch({
+      type: "SET_CURRENT_DATA",
+      data: stock
+    })
+      }
   const percentage = ((props.price - props.openPrice) / props.openPrice) * 100;
 
   const buyStock = () => {
@@ -56,7 +73,10 @@ function StatsRow(props) {
     row__percentage = "negative";
   }
   return (
-    <div className="row" onClick={buyStock}>
+    <div className="row" onClick={() => {
+      setCurrentStockData(props)
+      setCurrentStock(props.name)
+      }}>
       <div className="row__intro">
         <h1>{props.name}</h1>
         <p>{props.shares && props.shares + " shares"}</p>

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Newsfeed.css";
 import LineGraph from "./LineGraph.js";
 import Timeline from "./Timeline.js";
 import Chip from '@material-ui/core/Chip';
 import { Avatar } from "@material-ui/core";
+import {useSelector} from "react-redux"
 
 
 const popularTopics = [
@@ -20,12 +21,20 @@ const popularTopics = [
 ];
 
 function Newsfeed() {
+
+  const currentStockData = useSelector((state) => {
+    return state.stock.symbolData
+  })
+
+useEffect(() => {
+console.log(currentStockData)
+},[currentStockData])
   return (
     <div className="newsfeed">
       <div className="newsfeed__container"></div>
       <div className="newsfeed__chartSection">
         <div className="newsfeed__portfolio">
-          <h1>$114,656</h1>
+          <h1>{currentStockData} $114,656</h1>
           <p>+$44.63 (+0.04%) Today</p>
         </div>
         <div className="newsfeed__chart">

@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from "react";
 import StatsRow from "./StatsRow.js";
 import { db } from "./firebase";
+import {useDispatch, useSelector} from "react-redux"
 import "./Stats.css";
 
 const BASE_URL = "https://finnhub.io/api/v1/quote/";
 const TOKEN = "chbjqi9r01qmso50u040chbjqi9r01qmso50u04g";
 
 function Stats() {
+  const dispatch = useDispatch()
+
+  const setCurrentStock = (stock) => {
+dispatch({
+  type: "SET_CURRENT_STOCK",
+  data: stock
+})
+  }
+  const getCurrentStock = useSelector((state) => {
+  return state.stock.currentSymbol
+})
   const [stockData, setStockData] = useState([]);
   const [mystockData, setmyStocks] = useState([]);
 

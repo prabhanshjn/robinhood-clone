@@ -18,9 +18,11 @@ function LineGraph() {
   const [isGraphLoaded, setIsGraphLoaded] = useState(false)
   const [graphColor, setGraphColor] = useState("#c53b3b")
 
+  console.log(getCurrentStock)
 
   useEffect(() => {
     if(getCurrentStock !== ""){
+      console.log("entered", getCurrentStock)
       getStockDataAV().then((res) => {
         if(res.success){
           createGraphData(res.data["Time Series (5min)"])

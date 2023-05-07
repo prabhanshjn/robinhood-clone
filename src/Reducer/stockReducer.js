@@ -16,7 +16,8 @@ const stockReducer = (state = initialState, action) => {
             console.log(action.data)
             return{
             ...initialState,
-            symbolData: action.data
+            symbolData: action.data,
+            currentSymbol: action.data.name,
             }
         default:
             return state

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Newsfeed.css";
 import LineGraph from "./LineGraph.js";
 import Timeline from "./Timeline.js";
@@ -22,20 +22,30 @@ const popularTopics = [
 
 function Newsfeed() {
 
+  const [isStockPositive, setIsStockPositive] = useState("#c53b3b")
+
   const currentStockData = useSelector((state) => {
     return state.stock.symbolData
   })
 
 useEffect(() => {
-console.log(currentStockData)
+  if(currentStockData !== null){
+if(currentStockData.price - currentStockData.openPrice > 0){
+  setIsStockPositive("#5AC53B")
+}else{
+  setIsStockPositive("#c53b3b")
+}
+  }
 },[currentStockData])
+
+if(currentStockData !== null){
   return (
     <div className="newsfeed">
       <div className="newsfeed__container"></div>
       <div className="newsfeed__chartSection">
         <div className="newsfeed__portfolio">
-          <h1>{currentStockData} $114,656</h1>
-          <p>+$44.63 (+0.04%) Today</p>
+          <h1>{currentStockData? currentStockData.name: ""} ${currentStockData.price}</h1>
+          <p style={{color: isStockPositive}}>{currentStockData.price - currentStockData.openPrice > 0 ? "+" : "-"}${Math.abs(Math.round((currentStockData.price - currentStockData.openPrice) * 100)/100)} (+0.04%) Today</p>
         </div>
         <div className="newsfeed__chart">
           <LineGraph />
@@ -46,7 +56,7 @@ console.log(currentStockData)
         <h2> Buying Power</h2>
         <h2> $2586.11</h2>
       </div>
-      <div className="newsfeed__market__section">
+      <div className="newsfeed__market__secFztion">
         <div className="newsfeed__market__box">
           <p>Markets Closed</p>
           {/* <h1>🎅Merry Christmas🎅</h1> */}
@@ -83,6 +93,12 @@ console.log(currentStockData)
       </div>
     </div>
   );
+}
+
+return(
+  <>Loading</>
+)
+
 }
 
 export default Newsfeed;

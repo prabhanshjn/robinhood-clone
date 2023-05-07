@@ -9,15 +9,8 @@ import "./StatsRow.css";
 function StatsRow(props) {
   const dispatch = useDispatch()
 
-  const setCurrentStock = (stock) => {
-dispatch({
-  type: "SET_CURRENT_STOCK",
-  data: stock
-})
-  }
-
   const setCurrentStockData = (stock) => {
-    
+    console.log(stock)
     dispatch({
       type: "SET_CURRENT_DATA",
       data: stock
@@ -75,7 +68,7 @@ dispatch({
   return (
     <div className="row" onClick={() => {
       setCurrentStockData(props)
-      setCurrentStock(props.name)
+      
       }}>
       <div className="row__intro">
         <h1>{props.name}</h1>

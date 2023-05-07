@@ -44,7 +44,8 @@ if(currentStockData !== null){
       <div className="newsfeed__container"></div>
       <div className="newsfeed__chartSection">
         <div className="newsfeed__portfolio">
-          <h1>{currentStockData? currentStockData.name: ""} ${currentStockData.price}</h1>
+          <h1>{currentStockData? currentStockData.name: ""} </h1> 
+          <h2>${currentStockData.price}</h2>
           <p style={{color: isStockPositive}}>{currentStockData.price - currentStockData.openPrice > 0 ? "+" : "-"}${Math.abs(Math.round((currentStockData.price - currentStockData.openPrice) * 100)/100)} (+0.04%) Today</p>
         </div>
         <div className="newsfeed__chart">

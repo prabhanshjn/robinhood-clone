@@ -68,7 +68,7 @@ function StatsRow(props) {
   return (
     <div className="row" onClick={() => {
       setCurrentStockData(props)
-      
+      buyStock()
       }}>
       <div className="row__intro">
         <h1>{props.name}</h1>
